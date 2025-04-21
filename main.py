@@ -1,9 +1,13 @@
-from gpiozero import DistanceSensor
-from time import sleep
-
-capteur = DistanceSensor(echo = 12, trigger = 17, max_distance = 3)
-
-while True:
-    cm = capteur.distance * 100
-    print("DIstance:"+ str(cm)+ "cm")
-    sleep(1)
+from controler.controler import Controleur
+import time
+    
+if __name__ == "__main__":
+    try:
+        app = Controleur()
+        app.demarrer_thread()
+        
+        while True:
+            time.sleep(1) #garde programme actif
+        
+    except Exception as e:
+        print("Erreur de demarrage:", e)                               
