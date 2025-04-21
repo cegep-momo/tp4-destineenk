@@ -10,7 +10,6 @@ class Platine:
     
     def appuyer_bouton(self):
         while True:
-            print("En attendre de lappui")
             if self.bouton_demarrer.is_pressed:
                 if not self.systeme_demarrer:
                     self.systeme_demarrer = True
