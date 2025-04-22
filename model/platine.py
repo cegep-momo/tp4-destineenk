@@ -23,8 +23,9 @@ class Platine:
                     self.vue.message_activation()                         
                 else:
                     self.vue.message_arret()
+                    sleep(1.5)
                     self.mesure = False
-                    self.lcd.clear()
+                    self.vue.desactivation_mesure()
                 sleep(1)
                 
             if self.systeme_demarrer and self.bouton_mesure.is_pressed:
@@ -38,7 +39,7 @@ class Platine:
                 
             if self.systeme_demarrer and self.mesure:
                 self.cm = round(self.capteur.distance * 100)
-                self.vue.message_distance()
+                self.vue.message_distance(self.cm)
                 sleep(5)
             sleep(0.1)
                     
