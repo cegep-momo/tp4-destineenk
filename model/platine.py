@@ -14,6 +14,7 @@ class Platine:
         self.lcd.init(0x27,1) #initialisation de ecran
         self.capteur = DistanceSensor(echo = 12, trigger = 17)
         self.vue = Vue()
+        self.liste_mesure = []
     
     def appuyer_bouton(self):
         while True:
@@ -26,13 +27,13 @@ class Platine:
                     sleep(1.5)
                     self.mesure = False
                     self.vue.desactivation_mesure()
+                    self.vider_mesures()                  
                 sleep(1)
                 
             if self.systeme_demarrer and self.bouton_mesure.is_pressed:
                 self.vue.message_mesure()
                 sleep(1)
                 self.mesure = True
-                  
                 while self.bouton_mesure.is_pressed:
                     sleep(0.5)
                 sleep(0.5)
@@ -40,9 +41,16 @@ class Platine:
             if self.systeme_demarrer and self.mesure:
                 self.cm = round(self.capteur.distance * 100)
                 self.vue.message_distance(self.cm)
+                self.liste_mesure.append(self.cm)
                 sleep(5)
             sleep(0.1)
-                    
+            
+    def get_liste_mesure(self):
+        return self.liste_mesure
+    
+    def vider_mesures(self):
+        self.liste_mesure = []
+
                 
                             
         
