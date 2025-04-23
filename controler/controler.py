@@ -1,12 +1,11 @@
 import threading
 from model.platine import Platine
-from model.mesure import Modele
+from model.mesure import Mesure
 
 class Controleur:
     def __init__(self):
         self.thread = None #stock le thread
         self.platine = Platine()
-        self.model = Modele("./donnees.json")
     
 
         
@@ -21,12 +20,9 @@ class Controleur:
         mesures = self.platine.get_liste_mesure()
         if mesures:
             try:
-                for distances in mesures:
-                    self.model.creer_mesure(distances)
-                print(f"Mesures à enregistrer: {self.model.mesures}")  # Vérifie ce que tu enregistres
-
-                self.model.enregister_donnees()
-                self.platine.vider_mesures()
+                for distance in mesures:
+                    mesure = Mesure(distance)
+                    mesure.sauvegarderJson()
             except Exception as e:
                 print("Erreur lors de lenregistrement des donnees: {e}")
     

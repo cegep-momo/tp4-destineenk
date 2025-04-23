@@ -1,30 +1,40 @@
 import json, codecs
-from moduleTP4 import Mesure
+import os
+import datetime
 
-class Modele:
-    def __init__(self, fichier):
-        self.fichier = fichier
-        self.mesures = []
+
+class Mesure:
+    def __init__(self, distance):
+        self.dateHeureMesure = datetime.datetime.now()
+        self.dataMesure = distance
         
-    def creer_mesure(self, distance):
-        mesure = Mesure(distance)
-        self.mesures.append(mesure)
+    def __repr__(self):
+        return  f"Mesure(date= {self.dateHeureMesure}, distance={self.dataMesure})"
+    
+    def dictionnaire_mesure(self):
+        return  f"Date et heure {self.dateHeureMesure}, Donnee mesuree: {self.dataMesure}"
+
+    
+
+    def sauvegarderJson(self):
+
+        if os.path.exists("./donnees.json"):
+            try:
+                with open("./donnees.json", encoding="utf-8") as fichier:
+                    data = json.load(fichier)
+            except (json.JSONDecodeError, FileNotFoundError):
+                print("Erreur lors de la lecture du fichier")
+                data = {"./donnees": []}
         
-    def enregister_donnees(self):
-        nouvelles_donnees = []
-        for mesure in self.mesures:
-            nouvelles_donnees.append(mesure.afficherMesure())
-      
-        try:
-            with codecs.open(self.fichier,  "r", encoding="utf-8") as f:
-                donnees = json.load(f)
                 
-        except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"Erreur lors de louverture du fichier: {e}")
-            donnees = []
+        mesures_dict = {
+        "Date et heure": str(self.dateHeureMesure),
+        "Donnee mesuree": str(self.dataMesure)
+        }
+        data["./donnees"].append(mesures_dict)
+         
             
-        donnees.append(nouvelles_donnees)
         
-        with codecs.open(self.fichier, "w", encoding="utf-8") as f:
-            json.dump(donnees, f, indent= 4, ensure_ascii = False)
-            print(f"Donnees enregistrées dans {self.fichier}: {donnees}")  # Vérifie le contenu du fichier
+        with codecs.open("./donnees.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii = False,
+            indent=4, sort_keys=True)
