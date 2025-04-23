@@ -2,6 +2,7 @@ from gpiozero import Button, DistanceSensor
 import LCD1602 
 from time import sleep
 from view.view import Vue
+from model.mesure import Modele
 
 class Platine:
     def __init__(self):
@@ -15,6 +16,7 @@ class Platine:
         self.capteur = DistanceSensor(echo = 12, trigger = 17)
         self.vue = Vue()
         self.liste_mesure = []
+        self.mesure = Modele()
     
     def appuyer_bouton(self):
         while True:
@@ -24,19 +26,18 @@ class Platine:
                     self.vue.message_activation()                         
                 else:
                     self.vue.message_arret()
-                    sleep(1.5)
                     self.mesure = False
                     self.vue.desactivation_mesure()
-                    self.vider_mesures()                  
+                    self.vider_mesures() 
+                    self.mesure.enregister_donnees()
                 sleep(1)
                 
             if self.systeme_demarrer and self.bouton_mesure.is_pressed:
                 self.vue.message_mesure()
-                sleep(1)
                 self.mesure = True
+                sleep(1)
                 while self.bouton_mesure.is_pressed:
                     sleep(0.5)
-                sleep(0.5)
                 
             if self.systeme_demarrer and self.mesure:
                 self.cm = round(self.capteur.distance * 100)

@@ -27,3 +27,4 @@ class Modele:
         
         with codecs.open(self.fichier, "w", encoding="utf-8") as f:
             json.dump(donnees, f, indent= 4, ensure_ascii = False)
+            print(f"Donnees enregistrées dans {self.fichier}: {donnees}")  # Vérifie le contenu du fichier
