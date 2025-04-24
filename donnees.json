@@ -1,12 +1,24 @@
 {
     "donnees": [
         {
-            "Date et heure": "2025-04-22 23:31:28.812950",
-            "Donnee mesuree": "13"
+            "Date et heure": "2025-04-23 20:29:08.855214",
+            "Donnee mesuree": "30.87"
         },
         {
-            "Date et heure": "2025-04-22 23:32:28.833298",
-            "Donnee mesuree": "13"
+            "Date et heure": "2025-04-23 20:29:08.857393",
+            "Donnee mesuree": "6.32"
+        },
+        {
+            "Date et heure": "2025-04-23 20:29:08.861238",
+            "Donnee mesuree": "8.93"
+        },
+        {
+            "Date et heure": "2025-04-23 20:29:08.868739",
+            "Donnee mesuree": "5.12"
+        },
+        {
+            "Date et heure": "2025-04-23 20:29:08.871735",
+            "Donnee mesuree": "100.0"
         }
     ]
 }

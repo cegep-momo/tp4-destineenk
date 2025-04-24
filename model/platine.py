@@ -10,7 +10,7 @@ class Platine:
        
         self.systeme_demarrer = False # systeme en marche
         self.mesure = False
-        self.capteur = DistanceSensor(echo = 12, trigger = 17)
+        self.capteur = DistanceSensor(echo = 16, trigger = 17)
         self.vue = Vue()
         self.liste_mesure = []
         self.bouton_demarrer = Button(23) 
@@ -34,13 +34,14 @@ class Platine:
                     sleep(0.1)
                 
             if self.systeme_demarrer and self.mesure:
-                self.cm = round(self.capteur.distance * 100)
+                self.cm = round(self.capteur.distance * 100, 2)
                 self.vue.message_distance(self.cm)
                 self.liste_mesure.append(self.cm)
                 sleep(5)
                 
     def arreter_lecture(self):
         self.vue.message_arret()
+        sleep(1)
         self.mesure = False
         self.vue.desactivation_mesure()
         print("Sauvegarde des mesures")

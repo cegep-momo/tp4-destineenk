@@ -25,4 +25,4 @@ class Vue:
         self.lcd.clear()
     
     def message_distance(self, distance_mesure):
-        self.affichage_ecran(f"Distance: {distance_mesure} cm")
+        self.affichage_ecran(f"Dist: {distance_mesure} cm")
