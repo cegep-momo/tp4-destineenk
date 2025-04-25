@@ -53,8 +53,10 @@ class Platine:
    
     def get_liste_mesure(self):
         return self.liste_mesure
- 
-   
+    
+        
+    def is_lit(self):
+        return self.bouton_demarrer.is_active
                 
                             
         
