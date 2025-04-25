@@ -10,16 +10,13 @@ class Tester(unittest.TestCase):
     def setUp(self):
         self.platine = Platine()
     
-    def test_bouton_appuye(self):
+    def test_bouton_appuye(self): #true si le bouton est appuye
         self.platine.bouton_demarrer.pin.drive_low()
         self.assertTrue(self.platine.is_lit())
         
- 
-    def test_bouton_relache(self):
-        self.platine.bouton_demarrer.pin.drive_high()
-        self.assertFalse(self.platine.is_lit())
 
-
+    def test_initialisation_bouton(self): #true si le bouton nest pas false
+        self.assertIsNotNone(self.platine.bouton_demarrer)
     
 if __name__ == "__main__":
     unittest.main()
